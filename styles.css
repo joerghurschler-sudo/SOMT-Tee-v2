@@ -501,6 +501,7 @@ p .somt,
 
 .pairing-text {
   flex: 1;
+  max-width: 1100px;
   hyphens: auto;
   padding-top: 8%;  /* <-- anpassen: wieviel der Text nach unten rückt */
 }
@@ -518,7 +519,7 @@ p .somt,
    ============================================ */
 
 .about {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   text-align: justify;
   padding-top: 2rem;    /* <-- Abstand nach oben (von .section erbt ~164px, hier überschreiben) */
@@ -591,25 +592,25 @@ p .somt,
    FOOTER
    ============================================ */
 
-.footer {
-  border-top: 1px solid var(--color-accent);
-  padding: 2.5rem var(--spacing-sm);  /* <-- mehr Leerraum unten, von ~1.5rem auf 4rem */
-  text-align: center;
-  transition: border-top-width 0.3s ease;
-  font-size: 0.8rem;
-}
+  .footer {
+    border-top: 1px solid var(--color-accent);
+    padding: 1.25rem var(--spacing-sm);
+    text-align: center;
+    transition: border-top-width 0.3s ease;
+    font-size: 0.8rem;
+  }
 
 .footer:hover {
   border-top-width: 4px;
 }
 
-.footer-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-}
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
 .email {
   padding-right: 1.5rem;
@@ -664,58 +665,63 @@ p .somt,
 
 .footer,
 .footer a,
+
 .footer p,
 .footer .email a,
 .footer .social a {
   color: #000;
   font-weight: normal;
 }
-
 /* ============================================
    RESPONSIVE
    ============================================ */
 
 @media (max-width: 768px) {
+
+ 
   .header.is-shrunk {
     height: 90px;
   }
 
+
   .header-socials {
     left: .7rem;
     gap: 0.5rem;
+    top: .7rem;
   }
 
-  .logo-img {
-    width: 80px;
+  /* Nav ausblenden auf Mobile */
+  .nav--header,
+  .nav--side {
+    
+   position: absolute;
+  right: 0.8rem;
+  top: 90%;
+  transform: translateY(-50%);
+  margin-top: 0;
+  gap: 0.5rem;
+  opacity: 0;
   }
 
-  .header.is-shrunk .logo {
-    transform: scale(1);
-  }
-
-  .header.is-shrunk .nav {
-    margin-top: 1rem;
-  }
-
-  .nav {
-    gap: 0.7rem;
-   
-  }
-
+  /* Nav link font size on mobile */
   .nav a {
-    font-size: 0.0rem;
-    letter-spacing: 0.1em;
-    height: .5rem ;
+    font-size: 0.6rem;
+  }
+
+  /* Logo on mobile — centered by flexbox, no negative margins */
+  .logo-img {
+    width: 140px;
+    margin-top: -1vh;
   }
 
   /* Hero Section auf Mobile */
   .hero-section {
-    height: 200vh;
-    padding-top: 40vh;
+    height: 250vh;
+    padding-top: 110vh;
   }
 
   .hero-content img {
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
   }
 
   .hero-text {
@@ -731,24 +737,40 @@ p .somt,
     margin-bottom: 0;
   }
 
+  /* Image override on mobile — smaller margin */
+  .hero-content img {
+    margin-bottom: 3rem;
+  }
 
   .section {
     padding: calc(50px + 0rem) var(--spacing-sm) 2rem;
   }
 
   .products {
-    padding: 1.5rem var(--spacing-sm) 0rem;
+    padding: 0.5rem var(--spacing-sm) 0rem;
+    gap: 3.5rem;
   }
 
   .product,
   .product--image-right {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.0rem;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+  }
+
+  .product:last-child {
+    margin-bottom: 0;
   }
 
   .product-image {
     flex: 0 0 auto;
     max-width: 100%;
+  }
+
+  .product-content {
+    padding-top: 0;
   }
 
   .product-image img {
@@ -765,41 +787,49 @@ p .somt,
   }
 
   /* Pairing Layout auf Smartphone */
+  .pairing {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   .pairing-hero {
     margin-bottom: 2rem;
   }
 
   .pairing-hero h1 {
-    margin-bottom: 3rem;
-    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+    margin-bottom: 2rem;
+    font-size: clamp(3rem, 10vw, 5.5rem) !important;
     transition: font-size 3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .pairing-title-large {
-    font-size: clamp(1.8rem, 6vw, 3rem) !important;
+    font-size: clamp(2rem, 6.5vw, 3.5rem) !important;
     transition: font-size 3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .pairing-subtitle {
-    font-size: 0.5em !important;
+    font-size: 0.65em !important;
     transition: font-size 3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .pairing-hero h1.is-visible .pairing-title-large {
-    font-size: clamp(3rem, 9vw, 5rem) !important;
+    font-size: clamp(4rem, 12vw, 7rem) !important;
   }
 
   .pairing-hero h1.is-visible .pairing-subtitle {
-    font-size: 0.4em !important;
+    font-size: 0.5em !important;
   }
 
   .pairing-hero h1.is-visible {
-    font-size: clamp(2rem, 6vw, 3.5rem) !important;
+    font-size: clamp(3.5rem, 10vw, 6rem) !important;
   }
 
   .pairing-content {
+    margin-top: 2rem;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
     padding-left: 0;
     padding-right: 0;
   }
@@ -809,21 +839,41 @@ p .somt,
     max-width: calc(100% - 2rem);
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-bottom: 0;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pairing-text {
+    padding-top: 0;
   }
 
   .pairing-text p {
     font-size: 1.0625rem;
-    margin-bottom: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    margin-bottom: 0.8rem;
+    padding-left: 0;
+
+    padding-right: 0;
+    line-height: 1.4;
+  }
+
+  .about p {
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .about {
+    padding-top: 0 !important;
+    padding-bottom: 1rem;
+    padding-left: var(--spacing-sm) !important;
+    padding-right: var(--spacing-sm) !important;
   }
 
   .about h1 {
+    margin-bottom: 0.5rem;
+  }
 
-   
-    margin-bottom: 0rem;
-
+  #about-p1 {
+    margin-top: 0;
   }
 
   
@@ -832,14 +882,24 @@ p .somt,
   .about-img {
     max-width: calc(100% - 2rem);
     margin-left: 1rem;
-    margin-top: 0rem;
+    margin-top: 1.5rem;
     margin-right: 1rem;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
   }
 
   /* Titelschrift auf Smartphone kleiner */
   h1 {
     font-size: clamp(3rem, 8vw, 5rem) !important;
+  }
+
+  .footer {
+    padding: 0.5rem var(--spacing-sm);
+    font-size: 0.65rem !important;
+  }
+
+  .footer-icon {
+    width: 14px;
+    height: 14px;
   }
 
   .mobile-break {
@@ -850,6 +910,199 @@ p .somt,
   .pairing-hero h1,
   .about h1 {
     font-size: clamp(3rem, 8vw, 5rem) !important;
+  }
+
+  /* Spacer zwischen Content und Footer */
+  div[style*="5rem"] {
+    height: 1rem !important;
+  }
+}
+
+  /* Medium smartphones (401px - 420px width) */
+  @media (max-width: 420px) and (min-width: 401px) {
+    .logo-img {
+      width: 110px;
+      margin-top: -2vh;
+    }
+    
+    .nav--header,
+    .nav--side {
+      gap: 0.3rem;
+      opacity: 0;
+    }
+  }
+
+  /* Small Desktop / Large Tablet (901px - 1200px) */
+  @media (max-width: 1200px) and (min-width: 901px) {
+    .pairing-content {
+      padding-left: 2rem;
+      padding-right: 4rem;
+      align-items: stretch;
+    }
+    
+    .pairing-content img {
+      max-width: 50%;
+      height: 100%;
+    }
+    
+    .pairing-text {
+      max-width: 50%;
+      height: 100%;
+    }
+  }
+
+  /* Tablet Portrait (601px - 750px) */
+  @media (max-width: 750px) and (min-width: 601px) {
+    .pairing-content {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin-top: 15%;
+    }
+    
+    .pairing-content img {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .pairing-text {
+      max-width: 100%;
+      padding-top: 7vh;
+      margin-bottom: 15%;
+    }
+    
+    /* Boutique Produkte vertikal */
+    .product,
+    .product--image-right {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .product-image {
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+    
+    .product-image img {
+      height: auto;
+      aspect-ratio: 4/3;
+    }
+    
+    .product-content {
+      padding-top: 0;
+    }
+    
+    /* About-Bild gleiche Werte wie Pairing-Bild */
+    .about-img {
+      max-width: 80%;
+      margin: 0 auto;
+      margin-bottom: 10%;
+    }
+    
+    /* Footer für Tablet */
+    .footer {
+      padding: 0.5rem var(--spacing-sm);
+      font-size: 0.75rem;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .email {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+
+  /* Tablet Landscape (751px - 900px) */
+  @media (max-width: 900px) and (min-width: 751px) {
+    .pairing-content {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin-top: 8%;
+    }
+    
+    .pairing-content img {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .pairing-text {
+      max-width: 100%;
+      padding-top: 7vh;
+    }
+    
+    /* Boutique Produkte vertikal */
+    .product,
+    .product--image-right {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .product-image {
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+    
+    .product-image img {
+      height: auto;
+      aspect-ratio: 4/3;
+    }
+    
+    .product-content {
+      padding-top: 0;
+    }
+    
+    /* About-Bild gleiche Werte wie Pairing-Bild */
+    .about-img {
+      max-width: 80%;
+      margin: 0 auto;
+      margin-bottom: 12%;
+    }
+    
+    /* Footer für Tablet */
+    .footer {
+      padding: 0.5rem var(--spacing-sm);
+      font-size: 0.75rem;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .email {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+
+  /* Extra narrow phones (375px width - iPhone SE) */
+  @media (max-width: 400px) {
+  .logo-img {
+    width: 80px;
+    margin-top: 0;
+  }
+  
+  .logo {
+    transform: scale(2.5);
+  }
+
+  .hero-section {
+    padding-top: 100vh;
+  }
+
+  .hero-text {
+    margin-top: 4rem;
+  }
+
+  .hero-content img {
+    margin-bottom: 2rem;
   }
 }
 

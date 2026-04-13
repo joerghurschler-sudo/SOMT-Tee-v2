@@ -52,11 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
+        const isMobile = window.innerWidth <= 768;
         let offset = 100;  // default
         const href = this.getAttribute('href');
-        if (href === '#boutique') offset = -40;
-        else if (href === '#pairing') offset = 40;
-        else if (href === '#about') offset = 30;
+        if (href === '#boutique') offset = isMobile ? +90 : -90;
+        else if (href === '#pairing') offset = isMobile ? 130 : 40;
+        else if (href === '#about') offset = isMobile ? 140 : 120;
         window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
       }
     });
