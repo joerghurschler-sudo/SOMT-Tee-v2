@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "img"
+public_folder: "/img"
+
+local_backend: true
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "index.html"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - label: "Hero Text"
+            name: "hero_text"
+            widget: "markdown"
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Taste", name: "taste", widget: "string"}
+              - {label: "Description", name: "description", widget: "markdown"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Order Info", name: "order", widget: "string"}
+              - {label: "Details", name: "details", widget: "string"}
+          - label: "Pairing Section"
+            name: "pairing"
+            widget: "object"
+            fields:
+              - {label: "Headline", name: "headline", widget: "string"}
+              - {label: "Text 1", name: "text1", widget: "markdown"}
+              - {label: "Text 2", name: "text2", widget: "markdown"}
+              - {label: "CTA Text", name: "cta", widget: "string"}
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - {label: "Headline", name: "headline", widget: "string"}
+              - {label: "Paragraph 1", name: "p1", widget: "markdown"}
+              - {label: "Paragraph 2", name: "p2", widget: "markdown"}
+              - {label: "Paragraph 3", name: "p3", widget: "markdown"}
+              - {label: "Image", name: "image", widget: "image"}
