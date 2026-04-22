@@ -22,11 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Auth per Query-Parameter (nginx blockiert Authorization Header)
+// Auth: Query-Parameter oder Bearer-Header
 $token = $_GET['token'] ?? '';
-if ($token !== AUTH_TOKEN) {
+$bearer = '';
+if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $h = $_SERVER['HTTP_AUTHORIZATION'];
+    if (preg_match('/^Bearer\s+(.+)$/i', $h, $m)) $bearer = $m[1];
+}
+if ($token !== AUTH_TOKEN && $bearer !== AUTH_TOKEN) {
     http_response_code(401);
-    echo json_encode(['error' => 'Invalid or missing token', 'hint' => 'Add ?token=somt-cms-2026 to URL']);
+    echo json_encode(['error' => 'Invalid or missing token', 'hint' => 'Add ?token=somt-cms-2026 to URL or use Bearer auth']);
     exit;
 }
 
