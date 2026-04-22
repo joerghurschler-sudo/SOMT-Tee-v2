@@ -3,8 +3,8 @@
  * SOMT CMS Webhook
  * Empfängt Content-Updates und schreibt index.html
  * 
- * Usage: POST mit JSON body an diese Datei
- * Authorization: Bearer token im Header
+ * Usage: POST an diese Datei mit ?token=somt-cms-2026
+ * Body: JSON mit Content-Feldern
  */
 
 define('AUTH_TOKEN', 'somt-cms-2026');
@@ -13,26 +13,20 @@ define('BACKUP_PATH', __DIR__ . '/index.html.bak');
 
 // CORS und JSON
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: https://drinksomt.ch');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Headers: Content-Type');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-// Auth
-$auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-if (!str_starts_with($auth, 'Bearer ')) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Missing authorization']);
-    exit;
-}
-$token = trim(substr($auth, 7));
+// Auth per Query-Parameter (nginx blockiert Authorization Header)
+$token = $_GET['token'] ?? '';
 if ($token !== AUTH_TOKEN) {
     http_response_code(401);
-    echo json_encode(['error' => 'Invalid token']);
+    echo json_encode(['error' => 'Invalid or missing token', 'hint' => 'Add ?token=somt-cms-2026 to URL']);
     exit;
 }
 
