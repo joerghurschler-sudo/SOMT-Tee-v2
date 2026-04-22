@@ -476,8 +476,8 @@
 <div class="status-bar" id="statusBar"></div>
 
 <script>
-const CMS_PASSWORD = 'somt-cms-2026';
-const WEBHOOK_URL = 'https://drinksomt.ch/cms-webhook.php';
+const CMS_PASSWORD='somt-cms-2026';
+const WEBHOOK_URL = 'https://drinksomt.ch/cms-webhook.php?token=somt-cms-2026';
 
 let statusTimeout;
 
@@ -541,8 +541,7 @@ async function save() {
     const res = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + CMS_PASSWORD
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     });
