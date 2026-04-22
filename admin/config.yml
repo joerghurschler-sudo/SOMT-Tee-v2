@@ -5,8 +5,6 @@ backend:
 media_folder: "img"
 public_folder: "/img"
 
-local_backend: true
-
 collections:
   - name: "pages"
     label: "Pages"
